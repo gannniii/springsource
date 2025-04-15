@@ -64,4 +64,33 @@ build : 프로젝트 생성, 라이브러리 설정, 코드 작업, 컴파일, �
 
    http://localhost:8080/board/update 브라우저 요청 => 컨트롤러 응답 => templates 찾기( templates / /board/update )  
      => templates / board/update.html 작성
-   
+
+3) 내장 서버 : Tomcat(설치 후 사용 - 스프링부트를 사용한다면 내장되어 있음)
+
+   http://localhost:8080/ : Tomcat 서버 구동 시 기본 경로
+
+   브라우저를 통해 http, https 프로토콜에 응답하는 서버 : SW 웹서버(Apache, NginX)
+   WAS(Web Application Server) : 웹서버 + 자바해석 => Tomcat
+
+4) 오류 발생
+  404 : 컨트롤러 경로 확인
+  405 : 컨트롤러 경로 + 매핑방식 확인
+
+5) 사용자 입력값 가져오기
+   (1) 변수 이용 : 타입 지정 가능 , 변수명은 form 요소의 이름과 일치
+   (2) 커맨드(DTO) 객체 이용 : 타입 지정 가능 , 변수명은 form 요소의 이름과 일치
+                               커맨드 객체 사용시 장점은 template 페이지까지 입력값이 유지됨
+   (3) HttpServletRequest 이용
+
+6) @ModelAttribute
+   - 별칭
+   - model.addAttribute("num1", num1) == @ModelAttribute("num1") : template 페이지에서 값을 유지하고 싶다면
+  
+7) RedirectAttributes : 컨트롤리에서 움직이는 방식이 redirect 일 때 사용 / 움직이면서 특정 값을 가지고 싶을 때 사용
+   - rttr.addAttribute("userid", "10");   ?userid=10 => 템플릿 ${para,.userid}
+   - ttr.addFlashAttribute("password", "12");  session 객체에 담는 것과 같은 방식 => ${password}
+
+8) 데이터 유지하기
+   - login.html 입력값 ==> 컨트롤러 ==> logout.html 입력값 유지 하고 싶다면?
+   - login.html 입력값 ==> 컨트롤러 ==> 모든 페이지에서 입력값 유지 하고 싶다면?
+   - login.html 입력값 ==> 컨트롤러 ==> 다른 페이지에서 입력값 소멸?
