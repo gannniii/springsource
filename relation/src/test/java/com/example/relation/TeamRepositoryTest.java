@@ -117,4 +117,27 @@ public class TeamRepositoryTest {
         // 2. FetchType 변경 : FetchType.EAGER(즉시) 관계있는 테이블 정보를 즉시 가지고 나오기 => left join 처리
     }
 
+    // ----------------------------
+    // 양방향
+    // 영속성 : Cascade
+    // ----------------------------
+
+    @Test
+    public void insertTest3() {
+
+        Team team = Team.builder().teamName("team3").build();
+        TeamMember member = TeamMember.builder().userName("김민성").team(team).build();
+        team.getMembers().add(member);
+
+        // teamMemberRepository.save(member);
+        teamRepository.save(team);
+    }
+
+    @Test
+    public void deleteTest2() {
+        // 부모 삭제 시 자식도 같이 삭제
+        // deleteTest() 와 비교
+        teamRepository.deleteById(3L);
+    }
+
 }

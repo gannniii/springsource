@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import jakarta.persistence.EntityNotFoundException;
 public class MemoService {
     // Repository 메소드 호출한 후 결과 받기
     private final MemoRepository memoRepository;
+    private final ModelMapper modelMapper;
 
     public List<MemoDTO> getList() {
         List<Memo> list = memoRepository.findAll();
@@ -36,7 +38,8 @@ public class MemoService {
 
         // list.stream().forEach(memo -> System.out.println(memo));
         List<MemoDTO> memos = list.stream()
-                .map(memo -> entityToDto(memo))
+                // .map(memo -> entityToDto(memo))
+                .map(memo -> modelMapper.map(memo, MemoDTO.class))
                 .collect(Collectors.toList());
 
         return memos;
@@ -45,7 +48,9 @@ public class MemoService {
     public MemoDTO getRow(Long mno) {
         Memo memo = memoRepository.findById(mno).orElseThrow(EntityNotFoundException::new);
         // entity => dto
-        MemoDTO dto = entityToDto(memo);
+        // MemoDTO dto = entityToDto(memo);
+        // modelMapper.map(원본, 변경할 타입)
+        MemoDTO dto = modelMapper.map(memo, MemoDTO.class);
         return dto;
     }
 
@@ -64,7 +69,8 @@ public class MemoService {
     public Long memoCreate(MemoDTO dto) {
         // 새로 입력할 memo는 MemoDTO에 저장
         // MemoDTO => Memo 변환
-        Memo memo = dtoToEntity(dto);
+        // Memo memo = dtoToEntity(dto);
+        Memo memo = modelMapper.map(dto, Memo.class);
         // 새로저장한 memo 리턴됨
         memoRepository.save(memo);
         return memo.getMno();
