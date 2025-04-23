@@ -178,3 +178,6 @@ th:href="@{/ex1(id=${dto.id})} : http://localhost:8080/ 다음부터 경로 설�
    3) findAll() : 전체조회
    4) deleteById() / delete() : 삭제
 
+   - modelmapper : dto ==> entity, entity ==> dto 자동으로 처리
+   
+
