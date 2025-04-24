@@ -1,8 +1,11 @@
-package com.example.todo.dto;
+package com.example.book.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,19 +14,20 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Builder
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ToDoDTO {
-    private Long id;
+@Setter
+@Builder
+public class BookDTO {
 
-    private String content;
+    private Long code;
 
-    private boolean completed;
+    private String title;
 
-    private boolean importanted;
+    private String author;
+
+    private int price;
 
     private LocalDateTime createdDate;
 
