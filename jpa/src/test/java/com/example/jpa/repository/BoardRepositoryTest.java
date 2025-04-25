@@ -15,6 +15,17 @@ public class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Test
+    public void queryMethodTest() {
+        System.out.println(boardRepository.findByWriter("user4"));
+        // System.out.println(boardRepository.findByTitle("board Title1"));
+
+        // System.out.println(boardRepository.findByBnoGreaterThan(5L));
+        // System.out.println(boardRepository.findByBnoGreaterThanOrderByBnoDesc(0L));
+        // System.out.println(boardRepository.findByBnoBetween(5L, 10L));
+
+    }
+
     // CRUD
 
     @Test

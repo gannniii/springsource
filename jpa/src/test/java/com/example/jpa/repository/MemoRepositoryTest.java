@@ -14,6 +14,12 @@ public class MemoRepositoryTest {
     @Autowired
     private MemoRepository memoRepository;
 
+    @Test
+    public void queryMethodTest() {
+        System.out.println();
+
+    }
+
     // test 메소드 작성
     @Test
     public void insertTest() {
