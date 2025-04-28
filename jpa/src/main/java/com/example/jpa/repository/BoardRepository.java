@@ -3,11 +3,12 @@ package com.example.jpa.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.example.jpa.entity.Board;
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Long>, QuerydslPredicateExecutor<Board> {
 
     // List<Board> findByWriter(String writer);
 
@@ -34,10 +35,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // @queryBy
     // ------------------------------------------------------------------
 
-    @Query("select b from Board b where b.writer = ?1")
+    // @Query("select b from Board b where b.writer = ?1")
+    @Query("select b from Board b where b.writer = :writer")
     List<Board> findByWriter(String writer);
 
-    @Query("select b from Board b where b.writer like ?1")
+    @Query("select b from Board b where b.writer like ?1%")
     List<Board> findByWriterStartingWith(String writer);
 
     @Query("select b from Board b where b.writer like %?1%")
@@ -48,4 +50,10 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // @Query(value = "select * from Board b where b.bno > ?1", nativeQuery = true)
     @NativeQuery("select * from Board b where b.bno > ?1")
     List<Board> findByBnoGreaterThan(Long bno);
+
+    // @Query("select b from Board b where b.bno > ?1")
+
+    @Query("select b.title, b.writer from Board b where b.title like %?1%")
+    List<Object[]> findByTitle2(String title);
+
 }

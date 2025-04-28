@@ -1,0 +1,74 @@
+JPA에서 제공하는 sql 관련 메소드
+
+findById() : @Id 어노테이션 부여된 요소(PK)를 기준으로 찾기
+             select * from board where bno =1;
+findAll() : 전체 찾기 (select * from board)
+save()
+
+--------------------------------------------------------------------
+
+쿼리 메소드 지원
+1) findBy~~~~~~~~~~
+   List<Board> findByWriter(String sriter);
+
+2) @Query 어노테이션 사용
+   @Query("select b from Board b where b.writer = ?1")
+   List<Board> findByWriter(String sriter);
+   - 파라메터 설정
+   1. ?1
+   2. 변수명
+   
+3) QueryDSL 이용 - 다른 라이브러리 도움 받기
+   1. QuerydslPredicateExecutor
+   2. querydslRepositorySupport
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dependency>
+    <groupId>com.querydsl</groupId>
+    <artifactId>querydsl-jpa</artifactId>
+    <version>5.1.0</version>
+	<classifier>jakarta</classifier>
+</dependency>
+<dependency>
+    <groupId>com.querydsl</groupId>
+    <artifactId>querydsl-apt</artifactId>
+    <version>5.1.0</version>
+	<classifier>jakarta</classifier>
+</dependency>
+
+
+
+
+<plugin>
+  <groupId>com.mysema.maven</groupId>
+  <artifactId>apt-maven-plugin</artifactId>
+  <version>1.1.3</version>
+  <executions>
+     <execution>
+        <goals>
+          <goal>process</goal>
+        </goals>
+        <configuration>
+          <outputDirectory>target/generated-sources/annotations</outputDirectory>
+          <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+        </configuration>
+     </execution>
+  </executions>
+</plugin>

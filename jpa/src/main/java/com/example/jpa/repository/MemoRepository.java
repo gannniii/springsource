@@ -12,7 +12,7 @@ public interface MemoRepository extends JpaRepository<Memo, Long> {
     List<Memo> findByMnoLessThan(Long mno);
 
     // where mno < 10 order by mno desc
-    List<Memo> findByMnoGLessThanOrderByMnoDesc(Long mno);
+    List<Memo> findByMnoLessThanOrderByMnoDesc(Long mno);
 
     // where memoText like '%memo%'
     List<Memo> findByMemoTextContaining(String memoText);

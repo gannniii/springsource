@@ -46,7 +46,7 @@ public class Member {
     private int age;
 
     @Enumerated(EnumType.STRING)
-    private RoleType role;
+    private RoleType roleType;
 
     @CreatedDate
     private LocalDateTime regDate;
