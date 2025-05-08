@@ -31,6 +31,14 @@ public class BoardRepositoryTest {
     private ReplyRepository replyRepository;
 
     @Test
+    public void listReplyTest() {
+        Board board = Board.builder().bno(95L).build();
+        List<Reply> list = replyRepository.findByBoardOrderByRno(board);
+
+        System.out.println(list);
+    }
+
+    @Test
     public void insertMemberTest() {
         IntStream.rangeClosed(1, 10).forEach(i -> {
             Member member = Member.builder()
