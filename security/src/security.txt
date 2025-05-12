@@ -24,3 +24,8 @@ spring security
   로그인 성공 후 어디로 이동할 것인지 경로 지정을 하지 않으면 이전 url 로 되돌아감
 
   로그인 처리를 위한 Service 는 작성해야 함 : UserDetailsService 구현
+
+소셜 계정 처리 => 테이블 저장(email, pw)
+
+- 403 에러
+     csrf 값 확인 : form action 값 적었는지 확인

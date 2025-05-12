@@ -1,4 +1,4 @@
-package com.example.security.config;
+package com.example.board.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.security.security.CustomLoginSuccessHandler;
+import com.example.board.security.CustomLoginSuccessHandler;
 
 @EnableMethodSecurity // @PreAuthorize, @PostAuthorize 사용
 @EnableWebSecurity
@@ -41,8 +41,8 @@ public class SecurityConfig {
 
                 .formLogin(login -> login.loginPage("/member/login")
                         .successHandler(successHandler())
-                        .permitAll())
-                .oauth2Login(login -> login.successHandler(successHandler()));
+                        .permitAll());
+
         http.logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/"));
@@ -71,21 +71,5 @@ public class SecurityConfig {
         rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 7);
         return rememberMeServices;
     }
-
-    // @Bean
-    // UserDetailsService users() {
-    // UserDetails user = User.builder()
-    // .username("user")
-    // .password("{bcrypt}$2a$10$m5QD62m5rRW.vfIEsHn0pO.PFol0lYDfmGqY1IALzgDUSvSoxBi9S")
-    // .roles("USER") // ROLE_권한명
-    // .build();
-
-    // UserDetails admin = User.builder()
-    // .username("admin")
-    // .password("{bcrypt}$2a$10$m5QD62m5rRW.vfIEsHn0pO.PFol0lYDfmGqY1IALzgDUSvSoxBi9S")
-    // .roles("USER", "ADMIN") // ROLE_권한명
-    // .build();
-    // return new InMemoryUserDetailsManager(user, admin);
-    // }
 
 }
