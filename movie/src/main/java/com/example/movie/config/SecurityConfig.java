@@ -1,4 +1,4 @@
-package com.example.board.config;
+package com.example.movie.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.board.security.CustomLoginSuccessHandler;
+// import com.example.board.security.CustomLoginSuccessHandler;
 
 @EnableMethodSecurity // @PreAuthorize, @PostAuthorize 사용
 @EnableWebSecurity
@@ -28,30 +28,17 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
 
-        http// .authorizeHttpRequests(authorize -> authorize
-            // .requestMatchers("/", "/sample/guest").permitAll()
-            // .requestMatchers("/sample/member").hasRole("USER")
-            // .requestMatchers("/sample/admin").hasRole("ADMIN")
-            // .anyRequest().authenticated())
-            // .httpBasic(Customizer.withDefaults());
-            // .formLogin(Customizer.withDefaults()); // 시큐리티가 제공하는 기본 로그인 폼 페이지
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/assets/**", "/css/**", "/js/**", "/img/**")
-                        .permitAll()
-                        .requestMatchers("/board/read").permitAll()
-                        // .requestMatchers("/board/modify").authenticated()
-                        .requestMatchers("/board/modify").hasAnyRole("ADMIN", "USER", "MANAGER")
-                        .anyRequest().permitAll())
+        http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
 
-                .formLogin(login -> login.loginPage("/member/login")
-                        .successHandler(successHandler())
-                        .permitAll());
+        // http.formLogin(login -> login.loginPage("/member/login")
+        // .successHandler(successHandler())
+        // .permitAll());
 
-        http.logout(logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/"));
+        // http.logout(logout -> logout
+        // .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+        // .logoutSuccessUrl("/"));
 
-        http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
+        // http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
 
         return http.build();
     }
@@ -61,10 +48,10 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @Bean
-    CustomLoginSuccessHandler successHandler() {
-        return new CustomLoginSuccessHandler();
-    }
+    // @Bean
+    // CustomLoginSuccessHandler successHandler() {
+    // return new CustomLoginSuccessHandler();
+    // }
 
     @Bean
     RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {

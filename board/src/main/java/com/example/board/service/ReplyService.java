@@ -47,7 +47,7 @@ public class ReplyService {
     // 댓글 수정
     public Long update(ReplyDTO dto) {
         // 수정 대상 찾기
-        Reply reply = replyRepository.findById(dto.getBno()).get();
+        Reply reply = replyRepository.findById(dto.getRno()).get();
         // 변경부분 적용
         reply.changeText(dto.getText());
         // 저장
