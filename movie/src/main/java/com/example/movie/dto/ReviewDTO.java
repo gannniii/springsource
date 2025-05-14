@@ -1,0 +1,30 @@
+package com.example.movie.dto;
+
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
+public class ReviewDTO {
+
+    private Long rno;
+    private int grtade;
+    private String text;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
+
+    // member
+    private Long mid;
+    private String email;
+    private String nickname;
+}
