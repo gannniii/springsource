@@ -2,37 +2,30 @@ package com.example.movie.dto;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ToString
-public class MovieImageDTO {
+@Setter
+@Getter
+public class UploadReaultDTO {
 
-    private Long inum;
-
+    private String fileName;
     private String uuid;
+    private String folderPath;
 
-    private String imgName;
-
-    private String path;
-
-    public String getThumbnailURl() {
+    public String getImageURL() {
         String fullPath = "";
-        try {
-            fullPath = URLEncoder.encode(path + "/" + uuid + "_" + imgName, "utf-8");
-        } catch (UnsupportedEncodingException e) {
 
+        try {
+            fullPath = URLEncoder.encode(folderPath + "/" + uuid + "_" + fileName, "utf-8");
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
