@@ -2,7 +2,9 @@ package com.example.movie.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,21 @@ public class MovieService {
         private final MovieImageRepository movieImageRepository;
         private final MovieRepository movieRepository;
         private final ReviewRepository reviewRepository;
+
+        @Transactional
+        public Long createMovie(MovieDTO dto) {
+                log.info("영화 삽입 {}", dto);
+
+                // dto => entity
+                Map<String, Object> resultMap = dtoToEntity(dto);
+                Movie movie = (Movie) resultMap.get("movie");
+                List<MovieImage> movieImages = (List<MovieImage>) resultMap.get("movieImages");
+
+                movieRepository.save(movie);
+                movieImages.forEach(movieImage -> movieImageRepository.save(movieImage));
+
+                return movie.getMno();
+        }
 
         @Transactional
         public void deleteRow(Long mno) {
@@ -82,6 +99,35 @@ public class MovieService {
                                 .pageRequestDTO(pageRequestDTO)
                                 .build();
                 return pageResultDTO;
+        }
+
+        private Map<String, Object> dtoToEntity(MovieDTO dto) {
+
+                Map<String, Object> resultMap = new HashMap<>();
+
+                Movie movie = Movie.builder()
+                                .mno(dto.getMno())
+                                .title(dto.getTitle())
+                                .build();
+
+                resultMap.put("movie", movie);
+
+                List<MovieImageDTO> movieImageDTOs = dto.getMovieImages();
+                if (movieImageDTOs != null && movieImageDTOs.size() > 0) {
+                        List<MovieImage> movieImages = movieImageDTOs.stream().map(image -> {
+                                MovieImage movieImage = MovieImage.builder()
+                                                .uuid(image.getUuid())
+                                                .path(image.getPath())
+                                                .imgName(image.getImgName())
+                                                .movie(movie)
+                                                .build();
+
+                                return movieImage;
+
+                        }).collect(Collectors.toList());
+                        resultMap.put("movieImages", movieImages);
+                }
+                return resultMap;
         }
 
         private MovieDTO entityToDto(Movie movie, List<MovieImage> movieImages, Long count, Double avg) {

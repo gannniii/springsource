@@ -31,4 +31,16 @@ public class UploadReaultDTO {
 
         return fullPath;
     }
+
+    public String getThumbnailURL() {
+        String fullPath = "";
+
+        try {
+            fullPath = URLEncoder.encode(folderPath + "/s_" + uuid + "_" + fileName, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return fullPath;
+    }
 }
