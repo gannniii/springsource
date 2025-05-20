@@ -3,11 +3,10 @@
   <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/upload.css}">
     <link rel="stylesheet" th:href="@{/css/read.css}">
-    <link rel="stylesheet" th:href="@{/css/starr.css}">
+    <link rel="stylesheet" th:href="@{/css/starrr.css}">
   </th:block>
   <div class="container px-6 mx-auto grid" layout:fragment="content">
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Movie Modify</h2>
-
     <!-- New Table -->
 
     <div class="w-full overflow-x-auto">
@@ -42,7 +41,7 @@
               <span class="text-gray-700 dark:text-gray-400">평점</span>
               <input
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="평점"
+                placeholder="avg"
                 name="avg"
                 th:value="${dto.avg}"
                 readonly
@@ -51,7 +50,7 @@
           </div>
           <div class="mt-4">
             <a
-              th:href="@{/movie/modify(mno=${dto.mno}, page=${pageRequestDTO.page}, size=${pageRequestDTO.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+              th:href="@{/movie/modify(mno=${dto.mno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
               class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >수정</a
             >
@@ -61,7 +60,7 @@
               >삭제</a
             >
             <a
-              th:href="@{/movie/list(page=${pageRequestDTO.page}, size=${pageRequestDTO.size}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+              th:href="@{/movie/list(page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
               class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
               >목록</a
             >
@@ -80,7 +79,7 @@
       <!-- 리뷰영역 -->
       <div>
         <div class="flex items-center">
-          <span>리뷰 작성 [ <span class="revies-cnt"></span> ]</span>
+          <span>리뷰작성 [ <span class="review-cnt"></span> ]</span>
         </div>
       </div>
 
@@ -95,7 +94,6 @@
             />
           </label>
         </div>
-
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">감상평</span>
           <textarea
@@ -106,16 +104,14 @@
           ></textarea>
         </label>
       </div>
-    </div>    
+    </div>
 
     <!-- remove 시 사용할 폼 -->
      <form th:action="@{/movie/remove}" method="post" id="removeForm">
-      <input type="hidden" name="mno" th:value="${dto.mno}" />
-      
+      <input type="hidden" name="mno" th:value="${dto.mno}">
      </form>
   </div>
   <th:block layout:fragment="script">
     <script th:src="@{/js/modify.js}"></script>
   </th:block>
-
 </html>

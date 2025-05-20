@@ -3,7 +3,7 @@ const fileInput = document.querySelector("[name='file']");
 const showUploadImages = (arr) => {
   const output = document.querySelector(".uploadResult ul");
 
-  console.log("------arr");
+  console.log("----- arr");
   console.log(arr);
 
   let tags = "";
@@ -17,23 +17,23 @@ const showUploadImages = (arr) => {
 };
 
 // a (X) 클릭 시 a 기본 태그 중지
-// a herf 가져오기 : 파일명 가져오기
+// a href 가져오기 : 파일명 가져오기
 // axios.post()
 document.querySelector(".uploadResult").addEventListener("click", (e) => {
   e.preventDefault();
 
   // 이벤트 대상
-  console.log("e.target", e.target);
+  console.log("e.target ", e.target);
   // 이벤트 대상의 부모
-  console.log("e.currentTarget", e.currentTarget);
+  console.log("e.currentTarget ", e.currentTarget);
 
   // 이벤트 대상과 제일 가까운 : closest(selector)
 
   const aTag = e.target.closest("a");
   const liTag = e.target.closest("li");
 
-  // 속성 접근 : . or getAttribute("속성명")
-  // img.src : img 태그의 src 값 가져오기 or img.getAttribute("src")
+  // 속성 접근 : .  or getAttribute("속성명")
+  // img.src : img 태그의 src 값 가져오기   or img.getAttribute("src")
 
   console.log(aTag.href);
   console.log(aTag.getAttribute("href"));
@@ -42,10 +42,10 @@ document.querySelector(".uploadResult").addEventListener("click", (e) => {
   let form = new FormData();
   form.append("fileName", fileName);
 
-  if (!confirm("정말 삭제??")) return;
+  if (!confirm("정말로 삭제하시겠습니까?")) return;
 
   axios
-    .post("/upload/removeFile", form, {
+    .post(`/upload/removeFile`, form, {
       headers: {
         "X-CSRF-TOKEN": csrf,
       },
@@ -65,7 +65,7 @@ fileInput.addEventListener("change", (e) => {
   const files = inputFile.files;
   console.log(files);
 
-  //   form 생성 후 업로드 된 파일 append
+  //form 생성 후 업로드된 파일 append
   let form = new FormData();
 
   for (let i = 0; i < files.length; i++) {
@@ -73,7 +73,7 @@ fileInput.addEventListener("change", (e) => {
   }
 
   axios
-    .post("/upload/files", form, {
+    .post(`/upload/files`, form, {
       headers: {
         "X-CSRF-TOKEN": csrf,
       },

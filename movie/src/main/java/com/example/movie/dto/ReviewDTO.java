@@ -18,7 +18,7 @@ import lombok.ToString;
 public class ReviewDTO {
 
     private Long rno;
-    private int grtade;
+    private int grade;
     private String text;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
@@ -27,4 +27,6 @@ public class ReviewDTO {
     private Long mid;
     private String email;
     private String nickname;
+
+    private Long mno;
 }
