@@ -20,13 +20,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Genre {
+public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "genre_id")
-    private Long id;
+    private String email;
 
-    @Column(nullable = false, name = "genre_name")
-    private String name; // 장르명
+    private String pw;
+
+    private String nickname;
+
+    private boolean social;
 }
